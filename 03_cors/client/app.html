@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head></head>
+  <body>
+    <h1>LoopKaka's Security Fundamental Playlist</h1>
+    <button id="btn">API CALL</button>
+    <script>
+      const btn = document.getElementById("btn");
+      btn.addEventListener("click", async () => {
+        // console.log("Click");
+
+        // const URL = "http://localhost:3000/test";
+        // const resp = await fetch(URL);
+        // const data = await resp.json();
+        // console.log("Result", data);
+
+        const URL = "http://localhost:3000/post-endpoint";
+        const resp = await fetch(URL, {
+          method: "POST",
+          headers: {
+            "x-auth": "test",
+          },
+          body: JSON.stringify({ name: "Test" }),
+        });
+        const data = await resp.json();
+        console.log("Result", data);
+      });
+    </script>
+  </body>
+</html>
