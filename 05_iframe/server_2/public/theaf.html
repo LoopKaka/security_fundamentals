@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head></head>
+  <body>
+    <h1>Theaf Website</h1>
+    <iframe src="http://localhost:2000/server1/loopkaka" id="loopkaka"></iframe>
+    <script>
+      const frame = document.getElementById("loopkaka");
+      frame.onload = () => {
+        try {
+          console.log(frame.contentWindow.document);
+          console.log(frame.contentWindow.document.body.innerHTML);
+        } catch (error) {
+          console.log("Access Denied ", error);
+        }
+      };
+    </script>
+  </body>
+</html>

