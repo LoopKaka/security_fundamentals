@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head></head>
+  <body>
+    <h1>IFrame Geo Location</h1>
+    <h3 id="lat"></h3>
+    <h3 id="long"></h3>
+    <button onclick="fetchLocation()">Fetch Location</button>
+    <script>
+      function fetchLocation() {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const long = position.coords.longitude;
+
+            document.getElementById("lat").innerHTML = "Lat: " + lat;
+            document.getElementById("long").innerHTML = "Long: " + long;
+          },
+          (error) => {
+            console.log("Error: ", error);
+          },
+          {
+            enableHighAccuracy: false,
+            timeout: 10000,
+            maximumAge: 10000,
+          },
+        );
+      }
+    </script>
+  </body>
+</html>
