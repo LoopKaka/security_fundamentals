@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head></head>
+  <body style="text-align: center">
+    <h1>LoopKaka's Security Fundamental Playlist</h1>
+    <form id="apiForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required /><br /><br />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required /><br /><br />
+
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option></select
+      ><br /><br />
+
+      <label for="mobile">Mobile:</label>
+      <input type="number" id="mobile" name="mobile" required /><br /><br />
+
+      <button type="submit">Submit</button>
+    </form>
+    <script>
+      document
+        .getElementById("apiForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const data = Object.fromEntries(new FormData(e.target));
+
+          if (!validation(data)) {
+            alert("Input is not valid");
+            return;
+          }
+
+          try {
+            const response = await fetch("/api/form-submit", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            alert(result.message);
+          } catch (error) {
+            console.log(error);
+          }
+        });
+
+      function validation(data) {
+        const { username, email, age, mobile, gender } = data;
+
+        if (!/^[a-z0-9]+$/.test(username) && username.length > 9) {
+          return false;
+        }
+
+        if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+          return false;
+        }
+
+        if (age < 0 || age > 50) {
+          return false;
+        }
+
+        if (!/^\d{10}$/.test(mobile)) {
+          return false;
+        }
+
+        if (!["Male", "Female"].includes(gender)) {
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </body>
+</html>
