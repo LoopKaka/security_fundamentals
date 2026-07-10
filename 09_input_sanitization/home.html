@@ -1,0 +1,21 @@
+<html>
+  <head></head>
+  <body style="text-align: center">
+    <h1>LoopKaka's Security Fundamental Playlist</h1>
+    <div id="comments"></div>
+    <textarea rows="10" cols="50" id="commentArea"></textarea><br /><br />
+    <button id="btn">Comment</button>
+  </body>
+  <script>
+    const div = document.getElementById("comments");
+    const area = document.getElementById("commentArea");
+    const btn = document.getElementById("btn");
+
+    btn.addEventListener("click", () => {
+      const item = document.createElement("p");
+      item.innerHTML = area.value;
+      div.appendChild(item);
+      area.value = "";
+    });
+  </script>
+</html>
