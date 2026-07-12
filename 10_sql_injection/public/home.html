@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head></head>
+  <body style="text-align: center">
+    <h1>LoopKaka's Security Fundamental Playlist</h1>
+    <form onsubmit="login(event)">
+      <label for="username">Username</label><br />
+      <input type="text" name="username" id="username" /><br />
+      <label for="password">Password</label><br />
+      <input type="password" name="password" id="password" /><br />
+      <button type="submit">Login</button>
+      <p id="message"></p>
+    </form>
+    <script>
+      async function login(event) {
+        event.preventDefault();
+
+        const message = document.getElementById("message");
+        const uName = document.getElementById("username").value;
+        const pwd = document.getElementById("password").value;
+        const URL = "http://localhost:2000/api/login";
+
+        try {
+          const resp = await fetch(URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: uName,
+              password: pwd,
+            }),
+          });
+          const data = await resp.json();
+
+          message.innerText =
+            data.message || data.error || "Something went wrong";
+        } catch (error) {
+          message.innerText = "Unable to login. Please try again.";
+        }
+      }
+    </script>
+  </body>
+</html>
