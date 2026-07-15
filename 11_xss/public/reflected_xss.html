@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>LoopKaka's Reflected XSS Demo</title>
+  </head>
+  <body>
+    <h1>LoopKaka Search</h1>
+
+    <input id="keyword" placeholder="Search" />
+
+    <button onclick="search()">Search</button>
+
+    <script>
+      function search() {
+        const keyword = document.getElementById("keyword").value;
+
+        window.location = "/api/search?keyword=" + encodeURIComponent(keyword);
+      }
+    </script>
+  </body>
+</html>

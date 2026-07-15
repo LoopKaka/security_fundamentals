@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>LoopKaka's DOM XSS Demo</title>
+  </head>
+
+  <body>
+    <h1>LoopKaka's DOM XSS Demo</h1>
+
+    <h2 id="message"></h2>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+
+      const name = params.get("name");
+
+      // Vulnerable Code
+      document.getElementById("message").innerHTML = "Welcome " + name;
+    </script>
+  </body>
+</html>

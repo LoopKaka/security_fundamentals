@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <title>LoopKaka's Stored XSS Demo</title>
+  </head>
+  <body>
+    <h1>LoopKaka Comments</h1>
+
+    <textarea id="comment" rows="4" cols="50"></textarea>
+
+    <br /><br />
+
+    <button onclick="addComment()">Post Comment</button>
+
+    <hr />
+
+    <h2>Comments</h2>
+
+    <div id="comments"></div>
+
+    <script>
+      async function loadComments() {
+        const response = await fetch("http://localhost:3000/api/comments");
+        const comments = await response.json();
+
+        const container = document.getElementById("comments");
+        container.innerHTML = "";
+
+        comments.forEach((comment) => {
+          // Intentionally vulnerable (for demo only)
+          container.innerHTML += `<p>${comment}</p>`;
+        });
+      }
+
+      async function addComment() {
+        const comment = document.getElementById("comment").value;
+
+        await fetch("http://localhost:3000/api/comments", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ comment }),
+        });
+
+        document.getElementById("comment").value = "";
+
+        loadComments();
+      }
+
+      loadComments();
+    </script>
+  </body>
+</html>
